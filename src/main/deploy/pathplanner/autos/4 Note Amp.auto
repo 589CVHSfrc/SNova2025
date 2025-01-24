@@ -1,0 +1,43 @@
+{
+  "version": 1.0,
+  "startingPose": {
+    "position": {
+      "x": 1.35,
+      "y": 7.07
+    },
+    "rotation": 88.53
+  },
+  "command": {
+    "type": "sequential",
+    "data": {
+      "commands": [
+        {
+          "type": "path",
+          "data": {
+            "pathName": "Score Amp"
+          }
+        },
+        {
+          "type": "path",
+          "data": {
+            "pathName": "Note 1 Amp Score"
+          }
+        },
+        {
+          "type": "path",
+          "data": {
+            "pathName": "Note 2 Amp to Amp"
+          }
+        },
+        {
+          "type": "path",
+          "data": {
+            "pathName": "Note 4(Amp to Amp)"
+          }
+        }
+      ]
+    }
+  },
+  "folder": "4+ Note Autos",
+  "choreoAuto": false
+}
