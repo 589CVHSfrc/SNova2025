@@ -45,31 +45,29 @@ public class DriveUtils {
 //         return AutoBuilder.followPath(path);
 //     }
 
-    public Command driveToPose(Pose2d requestedPose, DoubleSupplier speed) {
-        Pose2d startingPose = m_drive.getPose();
-        double[] xy = { (requestedPose.getX() - startingPose.getX()),
-                (requestedPose.getY() - startingPose.getY())  };
-        Pose2d midPose = startingPose.plus(new Transform2d(xy[0] * .9, xy[1] * 0.6, new Rotation2d(0)));
-        List<Translation2d> bezierPoints = PathPlannerPath.bezierFromPoses(startingPose, midPose, requestedPose);
+    // public Command driveToPose(Pose2d requestedPose, DoubleSupplier speed) {
+    //     Pose2d startingPose = m_drive.getPose();
+    //     double[] xy = { (requestedPose.getX() - startingPose.getX()),
+    //             (requestedPose.getY() - startingPose.getY())  };
+    //     Pose2d midPose = startingPose.plus(new Transform2d(xy[0] * .9, xy[1] * 0.6, new Rotation2d(0)));
+        // List<Translation2d> bezierPoints = PathPlannerPath.bezierFromPoses(startingPose, midPose, requestedPose);
 
-        // Create the path using the bezier points created above
-        PathPlannerPath path = new PathPlannerPath(
-                bezierPoints,
-                new PathConstraints(
-                        DriveConstants.kMaxSpeedMetersPerSecond * speed.getAsDouble(),
-                        AutoConstants.kMaxAccelerationMetersPerSecondSquared,
-                        DriveConstants.kMaxAngularSpeed,
-                        AutoConstants.kMaxAngularSpeedRadiansPerSecondSquared),
-                new GoalEndState(0.05, requestedPose.getRotation()));
-
-        // Prevent the path from being flipped if the coordinates are already correct
-        path.preventFlipping = true;
-        // return AutoBuilder.pathfindToPose(requestedPose, new PathConstraints(
+        // // Create the path using the bezier points created above
+        // PathPlannerPath path = new PathPlannerPath(
+        //         bezierPoints,
+        //         new PathConstraints(
         //                 DriveConstants.kMaxSpeedMetersPerSecond * speed.getAsDouble(),
         //                 AutoConstants.kMaxAccelerationMetersPerSecondSquared,
         //                 DriveConstants.kMaxAngularSpeed,
-        //                 AutoConstants.kMaxAngularSpeedRadiansPerSecondSquared), 0);
-        return AutoBuilder.followPath(path);
-    }
+        //                 AutoConstants.kMaxAngularSpeedRadiansPerSecondSquared),
+        //         new GoalEndState(0.05, requestedPose.getRotation()));
 
-}
+        // Prevent the path from being flipped if the coordinates are already correct
+        // path.preventFlipping = true;
+        // // return AutoBuilder.pathfindToPose(requestedPose, new PathConstraints(
+        // //                 DriveConstants.kMaxSpeedMetersPerSecond * speed.getAsDouble(),
+        // //                 AutoConstants.kMaxAccelerationMetersPerSecondSquared,
+        // //                 DriveConstants.kMaxAngularSpeed,
+        // //                 AutoConstants.kMaxAngularSpeedRadiansPerSecondSquared), 0);
+        // return AutoBuilder.followPath(path);
+    }

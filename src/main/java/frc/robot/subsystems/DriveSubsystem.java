@@ -7,11 +7,13 @@ package frc.robot.subsystems;
 import java.util.Optional;
 
 import com.ctre.phoenix6.hardware.Pigeon2;
-import com.kauailabs.navx.frc.AHRS;
+// import com.kauailabs.navx.frc.AHRS;
+// import com.studica.frc;
+
 import com.pathplanner.lib.auto.AutoBuilder;
-import com.pathplanner.lib.util.HolonomicPathFollowerConfig;
-import com.pathplanner.lib.util.PIDConstants;
-import com.pathplanner.lib.util.ReplanningConfig;
+import com.pathplanner.lib.config.RobotConfig;
+import com.pathplanner.lib.config.PIDConstants;
+import com.pathplanner.lib.util.*;
 
 import edu.wpi.first.math.estimator.SwerveDrivePoseEstimator;
 import edu.wpi.first.math.filter.SlewRateLimiter;
@@ -33,7 +35,7 @@ import edu.wpi.first.wpilibj2.command.SubsystemBase;
 import frc.robot.Constants.AutoConstants;
 import frc.robot.Constants.DriveConstants;
 import frc.robot.Constants.ModuleConstants;
-import frc.robot.PhotonCam;
+// import frc.robot.PhotonCam;
 import frc.utils.SwerveUtils;
 
 public class DriveSubsystem extends SubsystemBase {
@@ -73,21 +75,21 @@ public class DriveSubsystem extends SubsystemBase {
   private SlewRateLimiter m_rotLimiter = new SlewRateLimiter(DriveConstants.kRotationalSlewRate);
   private double m_prevTime = WPIUtilJNI.now() * 1e-6;
 
-  private HolonomicPathFollowerConfig m_driveConfig = new HolonomicPathFollowerConfig(
-      new PIDConstants(ModuleConstants.kDrivingP, ModuleConstants.kDrivingI,
-          ModuleConstants.kDrivingD),
-      new PIDConstants(ModuleConstants.kTurningP, ModuleConstants.kTurningI,
-          ModuleConstants.kDrivingD),
-      AutoConstants.kMaxSpeedMetersPerSecond,
-      DriveConstants.kDrivePlatformRadius,
-      new ReplanningConfig(),
-      0.02);
+  // private HolonomicPathFollowerConfig m_driveConfig = new HolonomicPathFollowerConfig(
+  //     new PIDConstants(ModuleConstants.kDrivingP, ModuleConstants.kDrivingI,
+  //         ModuleConstants.kDrivingD),
+  //     new PIDConstants(ModuleConstants.kTurningP, ModuleConstants.kTurningI,
+  //         ModuleConstants.kDrivingD),
+  //     AutoConstants.kMaxSpeedMetersPerSecond,
+  //     DriveConstants.kDrivePlatformRadius,
+  //     new ReplanningConfig(),
+  //     0.02);
   private SwerveDrivePoseEstimator m_estimator = new SwerveDrivePoseEstimator(DriveConstants.kDriveKinematics,
       new Rotation2d(Units.degreesToRadians(getGyroYawDeg())), getSwerveModulePositions(), getPose());
   private Field2d m_field = new Field2d();
   public DriveSubsystem() {
 
-    configureHolonomicAutoBuilder();
+    // configureHolonomicAutoBuilder();
 
   }
 
@@ -367,36 +369,36 @@ public class DriveSubsystem extends SubsystemBase {
   //   }
   // }
 
-  public double distToAmp(Pose2d pose) {
-    // Translation2d AmpPose = DriveConstants.kShootingPoseAmpBLUE.getTranslation();
+  // public double distToAmp(Pose2d pose) {
+  //   // Translation2d AmpPose = DriveConstants.kShootingPoseAmpBLUE.getTranslation();
 
-    if (getAlliance() == true) {// ie, "red"
-      // System.out.println("RED AMP DIST");
-      return pose.getTranslation().getDistance(
-          PhotonCam.get().m_aprilTagLayout.getTagPose(5).get().toPose2d().getTranslation());
+  //   if (getAlliance() == true) {// ie, "red"
+  //     // System.out.println("RED AMP DIST");
+  //     return pose.getTranslation().getDistance(
+  //         PhotonCam.get().m_aprilTagLayout.getTagPose(5).get().toPose2d().getTranslation());
 
-    } else { // ie, "blue"}
-      // System.out.println("BLUE AMP DIST");
-      return pose.getTranslation().getDistance(
-          PhotonCam.get().m_aprilTagLayout.getTagPose(6).get().toPose2d().getTranslation());
+  //   } else { // ie, "blue"}
+  //     // System.out.println("BLUE AMP DIST");
+  //     return pose.getTranslation().getDistance(
+  //         PhotonCam.get().m_aprilTagLayout.getTagPose(6).get().toPose2d().getTranslation());
     
-      // return pose.getTranslation().getDistance(
-      //     DriveConstants.kShootingPoseAmpBLUE.getTranslation());
-    }
-  }
+  //     // return pose.getTranslation().getDistance(
+  //     //     DriveConstants.kShootingPoseAmpBLUE.getTranslation());
+  //   }
+  // }
 
   @Override
   public void periodic() {
 
     if (m_first) {
       System.out.println("Alliance Apriltag (red side = true):  " + getAlliance());
-      PhotonCam.get().setAlliance(getAlliance());
+      // PhotonCam.get().setAlliance(getAlliance());
 
     }
 
     Pose2d beforeCamAdded = m_estimator.update(currentRotation2d(), getSwerveModulePositions());
 
-    PhotonCam.get().estimatePose(m_estimator);
+    // PhotonCam.get().estimatePose(m_estimator);
 
     m_field.setRobotPose(beforeCamAdded);
     SmartDashboard.putNumber("Camera Adjustment",
@@ -413,23 +415,23 @@ public class DriveSubsystem extends SubsystemBase {
     SmartDashboard.putNumber("Requested Speed", m_controllerXY * DriveConstants.kMaxSpeedMetersPerSecond);
 
     // MRG -- Consider adding code below
-    SmartDashboard.putNumber("Distance to Amp", distToAmp(getPose()));
+    // SmartDashboard.putNumber("Distance to Amp", distToAmp(getPose()));
     SmartDashboard.putNumber("Distance to Speaker", distToSpeaker(getPose()));
     SmartDashboard.putData(m_field);
     SmartDashboard.putBoolean("Alliance True = Red", getAlliance());
     ///////////
   }
 
-  public void configureHolonomicAutoBuilder() {
-    AutoBuilder.configureHolonomic(
-        this::getPose, // getPose,
-        this::resetOdometry,
-        this::getChassisSpeeds,
-        this::driveRobotRelative,
-        m_driveConfig,
-        this::getAlliance,
-        this);
-  }
+  // public void configureHolonomicAutoBuilder() {
+  //   AutoBuilder.configureHolonomic(
+  //       this::getPose, // getPose,
+  //       this::resetOdometry,
+  //       this::getChassisSpeeds,
+  //       this::driveRobotRelative,
+  //       m_driveConfig,
+  //       this::getAlliance,
+  //       this);
+  // }
 
 }
 

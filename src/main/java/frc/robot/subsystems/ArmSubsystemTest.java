@@ -5,11 +5,14 @@
 package frc.robot.subsystems;
 
 import com.revrobotics.AbsoluteEncoder;
-import com.revrobotics.CANSparkLowLevel.MotorType;
-import com.revrobotics.CANSparkMax;
-import com.revrobotics.SparkAbsoluteEncoder.Type;
-import com.revrobotics.SparkLimitSwitch;
-
+import com.revrobotics.spark.SparkLimitSwitch;
+import com.revrobotics.spark.SparkLowLevel.MotorType;
+import com.revrobotics.spark.config.LimitSwitchConfig.Type;
+import com.revrobotics.spark.config.SparkMaxConfig;
+import com.revrobotics.spark.SparkMax;
+import com.revrobotics.spark.SparkBase.PersistMode;
+import com.revrobotics.spark.SparkBase.ResetMode;
+import com.revrobotics.*;
 import edu.wpi.first.math.controller.ArmFeedforward;
 import edu.wpi.first.wpilibj.DoubleSolenoid;
 import edu.wpi.first.wpilibj.PneumaticsModuleType;
@@ -18,22 +21,24 @@ import edu.wpi.first.wpilibj2.command.SubsystemBase;
 import frc.robot.Constants.ArmConstants;
 
 public class ArmSubsystemTest extends SubsystemBase {
-  private CANSparkMax m_angleMotor;
+  private SparkMax m_angleMotor;
   private double m_desiredAngle;
   private AbsoluteEncoder m_armEncoder;
   private SparkLimitSwitch m_limitSwitchTop;
   private SparkLimitSwitch m_limitSwitchBottom;
   private DoubleSolenoid m_discBrake;
   private ArmFeedforward m_feedforward;
-
+  private final SparkMaxConfig m_motorConfig;
   public ArmSubsystemTest() {
-    m_angleMotor = new CANSparkMax(ArmConstants.kAngleMotorCanID, MotorType.kBrushless);
-    m_angleMotor.setInverted(true);
-    m_limitSwitchTop = m_angleMotor.getForwardLimitSwitch(com.revrobotics.SparkLimitSwitch.Type.kNormallyOpen);
-    m_limitSwitchBottom = m_angleMotor.getReverseLimitSwitch(com.revrobotics.SparkLimitSwitch.Type.kNormallyOpen);
-
-    m_armEncoder = m_angleMotor.getAbsoluteEncoder(Type.kDutyCycle);
-
+    m_motorConfig = new SparkMaxConfig();
+    m_angleMotor = new SparkMax(ArmConstants.kAngleMotorCanID, MotorType.kBrushless);
+    // m_angleMotor.setInverted(true);
+    m_motorConfig.inverted(true);
+    m_motorConfig.limitSwitch
+      .forwardLimitSwitchType(Type.kNormallyOpen)
+      .reverseLimitSwitchType(Type.kNormallyOpen);
+    m_armEncoder = m_angleMotor.getAbsoluteEncoder();
+    m_angleMotor.configure(m_motorConfig, ResetMode.kResetSafeParameters, PersistMode.kNoPersistParameters);
     m_desiredAngle = 0;
 
     m_discBrake = new DoubleSolenoid(PneumaticsModuleType.REVPH, ArmConstants.kDiscBrakeForwardID,

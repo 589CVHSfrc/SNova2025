@@ -11,7 +11,7 @@ public class ArmToAngle extends Command {
   /** Creates a new ArmToAngle. */
   public ArmToAngle(ArmSubsystem arm) {
     // Use addRequirements() here to declare subsystem dependencies.
-    addRequirements(null);
+    addRequirements(arm);
   }
 
   // Called when the command is initially scheduled.

@@ -6,6 +6,7 @@ package frc.robot;
 
 //used to be: ...SparkBase.IdleMode, and was changed to ...SparkBase.ControlType, because the latter returned no errors.
 import com.revrobotics.spark.SparkBase.ControlType;
+import com.revrobotics.spark.config.SparkMaxConfig;
 
 import edu.wpi.first.math.geometry.Pose2d;
 import edu.wpi.first.math.geometry.Rotation2d;
@@ -30,7 +31,6 @@ import edu.wpi.first.math.util.Units;
  */
 public final class Constants {
   public static final class DriveConstants {
-
     public static final Pose2d kShootingPoseSpeakerRED = new Pose2d(14, 2, new Rotation2d(0));
     public static final Pose2d kShootingPoseSpeakerBLUE = new Pose2d(15.5, 2.6,
         new Rotation2d(Units.degreesToRadians(180)));
@@ -140,8 +140,8 @@ public final class Constants {
     public static final double kTurningMinOutput = -1;
     public static final double kTurningMaxOutput = 1;
 
-    public static final IdleMode kDrivingMotorIdleMode = IdleMode.kBrake;
-    public static final IdleMode kTurningMotorIdleMode = IdleMode.kBrake;
+    // public static final IdleMode kDrivingMotorIdleMode = IdleMode.kBrake;
+    // public static final IdleMode kTurningMotorIdleMode = IdleMode.kBrake;
 
     public static final int kDrivingMotorCurrentLimit = 50; // amps
     public static final int kTurningMotorCurrentLimit = 20; // amps

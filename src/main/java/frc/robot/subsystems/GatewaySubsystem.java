@@ -4,29 +4,41 @@
 
 package frc.robot.subsystems;
 
-import com.revrobotics.CANSparkLowLevel.MotorType;
-import com.revrobotics.SparkLimitSwitch.Type;
-import com.revrobotics.CANSparkMax;
-import com.revrobotics.SparkLimitSwitch;
-import com.revrobotics.CANSparkBase.IdleMode;
+import com.revrobotics.spark.SparkLowLevel.MotorType;
+import com.revrobotics.spark.SparkLimitSwitch;
+import com.revrobotics.spark.SparkMax;
+import com.revrobotics.spark.SparkBase.PersistMode;
+import com.revrobotics.spark.SparkBase.ResetMode;
+import com.revrobotics.spark.config.SparkMaxConfig;
+import com.revrobotics.spark.config.LimitSwitchConfig.Type;
+import com.revrobotics.spark.config.SparkBaseConfig.IdleMode;
+import com.revrobotics.spark.SparkBase;
 
 import edu.wpi.first.wpilibj2.command.SubsystemBase;
 import frc.robot.Constants.ShooterConstants;
 
 public class GatewaySubsystem extends SubsystemBase {
-  private CANSparkMax m_gatewayMotor;
+  private SparkMax m_gatewayMotor;
+  private SparkMaxConfig m_gatewayConfig;
   private SparkLimitSwitch m_gatewayLimitSwitch;
   private SparkLimitSwitch m_gatewayReverseLimitSwitch;
 
   public GatewaySubsystem() {
-    m_gatewayMotor = new CANSparkMax(ShooterConstants.kTopGatewayWheelMotorID, MotorType.kBrushless);
+    m_gatewayConfig = new SparkMaxConfig();
+    m_gatewayMotor = new SparkMax(ShooterConstants.kTopGatewayWheelMotorID, MotorType.kBrushless);
     m_gatewayMotor.setInverted(false);
-    m_gatewayLimitSwitch = m_gatewayMotor.getForwardLimitSwitch(Type.kNormallyOpen);
-    m_gatewayLimitSwitch.enableLimitSwitch(true);
-    m_gatewayReverseLimitSwitch = m_gatewayMotor.getReverseLimitSwitch(Type.kNormallyOpen);
-    m_gatewayLimitSwitch.enableLimitSwitch(false);
-    m_gatewayMotor.setIdleMode(IdleMode.kBrake);
-    m_gatewayMotor.burnFlash();
+    m_gatewayConfig.inverted(false);
+    m_gatewayConfig.limitSwitch
+      .forwardLimitSwitchType(Type.kNormallyOpen)
+      .forwardLimitSwitchEnabled(false)
+      .reverseLimitSwitchType(Type.kNormallyOpen);
+    // m_gatewayLimitSwitch.enableLimitSwitch(true);
+    // m_gatewayReverseLimitSwitch = m_gatewayMotor.getReverseLimitSwitch(Type.kNormallyOpen);
+    // m_gatewayLimitSwitch.enableLimitSwitch(false);
+    m_gatewayConfig.idleMode(IdleMode.kBrake);
+    // m_gatewayMotor.setIdleMode(IdleMode.kBrake);
+    // m_gatewayMotor.burnFlash();
+    m_gatewayMotor.configure(m_gatewayConfig, ResetMode.kResetSafeParameters, PersistMode.kNoPersistParameters);
 
     
   }

@@ -47,7 +47,7 @@ import frc.robot.commands.COMMAND_TESTING.FixedDrive;
 import frc.robot.commands.COMMAND_TESTING.HarmonyClimb;
 import frc.robot.commands.COMMAND_TESTING.PRINTBLUE;
 import frc.robot.commands.COMMAND_TESTING.PRINTRED;
-import frc.robot.commands.COMMAND_TESTING.ShootSmartDashboard;
+// import frc.robot.commands.COMMAND_TESTING.ShootSmartDashboard;
 import frc.robot.commands.COMMAND_TESTING.SwitchaRooCommand;
 import frc.robot.subsystems.ArmSubsystem;
 import frc.robot.subsystems.ClimberSubsystem;
@@ -301,11 +301,11 @@ public class RobotContainer {
                 // return new DriveBack(m_robotDrive);
                 try {
 
-                        Pose2d startingpose = PathPlannerAuto
-                                        .getStaringPoseFromAutoFile(m_autoChooser.getSelected().getName());
-                        m_robotDrive.resetOdometry(startingpose.rotateBy(new Rotation2d(Units.degreesToRadians(180))));
-                        System.out.print("====================STARTING POSE: " + startingpose +
-                                        "====================");
+                        // Pose2d startingpose = PathPlannerAuto
+                        // //                 .getStaringPoseFromAutoFile(m_autoChooser.getSelected().getName());
+                        // m_robotDrive.resetOdometry(startingpose.rotateBy(new Rotation2d(Units.degreesToRadians(180))));
+                        // System.out.print("====================STARTING POSE: " + startingpose +
+                        //                 "====================");
 
                         return m_autoChooser.getSelected();// .andThen(new RunCommand(
                         // () -> m_robotDrive.resetOdometry(m_robotDrive.getPose()

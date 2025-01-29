@@ -4,13 +4,16 @@
 
 package frc.robot.subsystems;
 import com.revrobotics.spark.SparkMax;
+import com.revrobotics.spark.SparkBase.PersistMode;
 import com.revrobotics.spark.SparkFlex;
 import com.revrobotics.spark.SparkLowLevel.MotorType;
 import com.revrobotics.spark.SparkClosedLoopController;
 import com.revrobotics.AbsoluteEncoder;
+import com.revrobotics.servohub.ServoHub.ResetMode;
 import com.revrobotics.spark.SparkMax;
 import com.revrobotics.spark.config.LimitSwitchConfig;
 import com.revrobotics.spark.config.SparkBaseConfig;
+import com.revrobotics.spark.config.SparkMaxConfig;
 import com.revrobotics.spark.config.LimitSwitchConfig.Type;
 import com.revrobotics.spark.SparkLimitSwitch;
 import com.revrobotics.spark.SparkLowLevel.MotorType;
@@ -29,22 +32,26 @@ public class ArmSubsystem extends SubsystemBase {
   private SparkLimitSwitch m_limitSwitchTop;
   private SparkLimitSwitch m_limitSwitchBottom;
   private DoubleSolenoid m_discBrake;
-  private final LimitSwitchConfig m_limitSwitchConfigTop;
-  private final LimitSwitchConfig m_limitSwitchConfigBottom;
-  private final SparkBaseConfig m_AngleMotorConfig;
+  // private final LimitSwitchConfig m_limitSwitchConfigTop;
+  // private final LimitSwitchConfig m_limitSwitchConfigBottom;
+  // private final SparkBaseConfig m_AngleMotorConfig;
+  private final SparkMaxConfig m_motorConfig;
 
   public ArmSubsystem() {
-    m_limitSwitchConfigTop = new LimitSwitchConfig();
-    m_limitSwitchConfigBottom = new LimitSwitchConfig();
-    m_limitSwitchConfigTop.forwardLimitSwitchType(LimitSwitchConfig.Type.kNormallyOpen);
-    m_limitSwitchConfigBottom.reverseLimitSwitchType(LimitSwitchConfig.Type.kNormallyOpen);
-    m_AngleMotorConfig()
-    m_AngleMotorConfig.apply(m_limitSwitchConfigBottom);
-    m_AngleMotorConfig.apply(m_limitSwitchConfigTop);
-    m_AngleMotorConfig.inverted(true);
+    m_motorConfig = new SparkMaxConfig();
+    m_motorConfig.limitSwitch.forwardLimitSwitchType(Type.kNormallyOpen);
+    m_motorConfig.limitSwitch.reverseLimitSwitchType(Type.kNormallyOpen);
+    // m_limitSwitchConfigTop = new LimitSwitchConfig();
+    // m_limitSwitchConfigBottom = new LimitSwitchConfig();
+    // m_limitSwitchConfigTop.forwardLimitSwitchType(LimitSwitchConfig.Type.kNormallyOpen);
+    // m_limitSwitchConfigBottom.reverseLimitSwitchType(LimitSwitchConfig.Type.kNormallyOpen);
+    // m_AngleMotorConfig()
+    // m_AngleMotorConfig.apply(m_limitSwitchConfigBottom);
+    // m_AngleMotorConfig.apply(m_limitSwitchConfigTop);
+    // m_AngleMotorConfig.inverted(true);
     m_angleMotor = new SparkMax(ArmConstants.kAngleMotorCanID, MotorType.kBrushless);
     m_angleMotor.setInverted(true);
-    m_angleMotor.configure(m_AngleMotorConfig, null, null);
+    m_angleMotor.configure(m_motorConfig, com.revrobotics.spark.SparkBase.ResetMode.kResetSafeParameters, PersistMode.kNoPersistParameters);
     //https://docs.revrobotics.com/revlib/24-to-25
     m_limitSwitchTop = m_angleMotor.getForwardLimitSwitch();//Both normally open
     m_limitSwitchBottom = m_angleMotor.getReverseLimitSwitch();

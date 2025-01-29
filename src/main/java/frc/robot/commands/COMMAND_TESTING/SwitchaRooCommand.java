@@ -22,19 +22,19 @@ public class SwitchaRooCommand extends Command {
   // Called when the command is initially scheduled.
   @Override
   public void initialize() {
-    if (m_drive.getAlliance()) {
-      // m_command = new PRINTRED();
+    // if (m_drive.getAlliance()) {
+    //   // m_command = new PRINTRED();
       
-      m_command = new DriveUtils(m_drive).driveToPose(DriveConstants.kShootingPoseAmpRED, () -> 1)
-          .andThen(new DriveUtils(m_drive).driveToPose(DriveConstants.kShootingPoseAmpRED, () -> .1));
+    //   m_command = new DriveUtils(m_drive).driveToPose(DriveConstants.kShootingPoseAmpRED, () -> 1)
+    //       .andThen(new DriveUtils(m_drive).driveToPose(DriveConstants.kShootingPoseAmpRED, () -> .1));
 
-    } else {
-      // m_command = new PRINTBLUE();
+    // } else {
+    //   // m_command = new PRINTBLUE();
 
-      m_command = new DriveUtils(m_drive).driveToPose(DriveConstants.kShootingPoseAmpBLUE, () -> 1)
-          .andThen(new DriveUtils(m_drive).driveToPose(DriveConstants.kShootingPoseAmpBLUE, () -> .1));
-    }
-    m_command.initialize();
+    //   m_command = new DriveUtils(m_drive).driveToPose(DriveConstants.kShootingPoseAmpBLUE, () -> 1)
+    //       .andThen(new DriveUtils(m_drive).driveToPose(DriveConstants.kShootingPoseAmpBLUE, () -> .1));
+    // }
+    // m_command.initialize();
   }
 
   // Called every time the scheduler runs while the command is scheduled.
