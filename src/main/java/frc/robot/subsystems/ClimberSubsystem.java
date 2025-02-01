@@ -213,6 +213,8 @@ public class ClimberSubsystem extends SubsystemBase {
     public Climber(int CanID, int forward, int reverse) {
       m_motor = new SparkMax(CanID, MotorType.kBrushless);
       m_motorConfig = new SparkMaxConfig();
+      
+
       m_motorConfig.smartCurrentLimit(ClimberConstants.kSmartCurrentLimitAmps);
       // m_encoder = m_motor.getEncoder();
       m_motorConfig.limitSwitch
@@ -220,8 +222,7 @@ public class ClimberSubsystem extends SubsystemBase {
         .reverseLimitSwitchType(Type.kNormallyOpen)
         .forwardLimitSwitchEnabled(true)
         .reverseLimitSwitchEnabled(true);
-      // m_limitSwitchForward = m_motor.getForwardLimitSwitch(SparkLimitSwitch.Type.kNormallyOpen);
-      // m_limitSwitchReverse = m_motor.getReverseLimitSwitch(SparkLimitSwitch.Type.kNormallyOpen);
+      
       // m_limitSwitchForward.enableLimitSwitch(true);
       // m_limitSwitchReverse.enableLimitSwitch(true);
       m_previousAmps = 0;
@@ -234,6 +235,9 @@ public class ClimberSubsystem extends SubsystemBase {
 
       m_bIsInverted = false;
       m_motor.configure(m_motorConfig, ResetMode.kResetSafeParameters,PersistMode.kNoPersistParameters);
+
+      m_limitSwitchForward = m_motor.getForwardLimitSwitch();
+      m_limitSwitchReverse = m_motor.getReverseLimitSwitch();
       // if inverted then forward limit switch and motor + is down and encoder reads
       // negative going up
       // if not inverted then reverse limit switch and motor - is down and encoder

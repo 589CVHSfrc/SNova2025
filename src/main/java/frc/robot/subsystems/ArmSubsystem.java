@@ -53,6 +53,7 @@ public class ArmSubsystem extends SubsystemBase {
     m_angleMotor.setInverted(true);
     m_angleMotor.configure(m_motorConfig, com.revrobotics.spark.SparkBase.ResetMode.kResetSafeParameters, PersistMode.kNoPersistParameters);
     //https://docs.revrobotics.com/revlib/24-to-25
+
     m_limitSwitchTop = m_angleMotor.getForwardLimitSwitch();//Both normally open
     m_limitSwitchBottom = m_angleMotor.getReverseLimitSwitch();
     m_armEncoder = m_angleMotor.getAbsoluteEncoder();
@@ -65,6 +66,8 @@ public class ArmSubsystem extends SubsystemBase {
   }
 
   public boolean isForwardLimitReached() {
+    boolean ispressed = m_limitSwitchTop.isPressed();
+    //showing as false even when pressed :(
     return m_limitSwitchTop.isPressed();
   }
 

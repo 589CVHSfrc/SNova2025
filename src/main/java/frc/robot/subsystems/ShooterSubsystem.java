@@ -54,14 +54,19 @@ public class ShooterSubsystem extends SubsystemBase {
     public ShooterSubsystem() {
         m_topMotor = new SparkMax(ShooterConstants.kShooterMotorTopCanID, MotorType.kBrushless);
         m_lowMotor = new SparkMax(ShooterConstants.kShooterMotorLowCanID, MotorType.kBrushless);
-        m_topMotor.setInverted(true);
-        m_lowMotor.setInverted(true);
-        m_topShooterConfig.inverted(true);
-        m_lowShooterConfig.inverted(true);
         m_topShooterConfig = new SparkMaxConfig();
         m_lowShooterConfig = new SparkMaxConfig();
+
         m_topMAXMotionConfig = new MAXMotionConfig();
         m_lowMAXMotionConfig = new MAXMotionConfig();
+
+        m_topMotor.setInverted(true);
+        m_lowMotor.setInverted(true);
+
+        m_topShooterConfig.inverted(true);
+        m_lowShooterConfig.inverted(true);
+
+        
         m_lowShooterConfig.limitSwitch
             .forwardLimitSwitchType(Type.kNormallyOpen)
             .forwardLimitSwitchEnabled(true);
@@ -114,6 +119,9 @@ public class ShooterSubsystem extends SubsystemBase {
             ShooterConstants.kShooterAllowedErr);
         m_lowMotor.configure(m_lowShooterConfig, ResetMode.kResetSafeParameters,PersistMode.kNoPersistParameters);
         m_topMotor.configure(m_topShooterConfig, ResetMode.kResetSafeParameters, PersistMode.kNoPersistParameters);
+
+        m_gatewayLimitSwitch = m_topMotor.getReverseLimitSwitch();
+
         // m_lowShooterClosedLoopController.
         // setSmartMotion(m_lowShooterClosedLoopConfig, ShooterConstants.kShooterMaxRPM, ShooterConstants.kShooterMinRPM,
         //         ShooterConstants.kShooterMaxAccel, ShooterConstants.kShooterAllowedErr, 0);
@@ -269,7 +277,7 @@ public class ShooterSubsystem extends SubsystemBase {
         // m_lowMotor.getAppliedOutput()*m_lowMotor.getBusVoltage());
         // SmartDashboard.putNumber("maxRPMTop", maxRPMTop);
         // SmartDashboard.putNumber("maxRPMLow", maxRPMLow);
-        SmartDashboard.putBoolean("NOTE IN?", m_gatewayLimitSwitch.isPressed());
+        //SmartDashboard.putBoolean("NOTE IN?", m_gatewayLimitSwitch.isPressed());
         SmartDashboard.putBoolean("INTAKE SPINNING", isIntaking());
         // SmartDashboard.putNumber("Rise Time Top", riseTimeTop);
         // SmartDashboard.putNumber("Rise Time Low", riseTimeLow);

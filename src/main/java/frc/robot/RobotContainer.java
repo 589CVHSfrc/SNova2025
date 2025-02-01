@@ -92,19 +92,19 @@ public class RobotContainer {
                 SmartDashboard.putData(m_autoChooser);
 
                 configureButtonBindings();
-                m_autoChooser.setDefaultOption("Forward", new PathPlannerAuto("Forward"));
-                m_autoChooser.addOption("2 Note Preload", new PathPlannerAuto("2Note Preload"));
-                m_autoChooser.addOption("!!!!NOTHING!!!!!", new WaitCommand(2));
-                m_autoChooser.addOption("Shoot Only - Speaker", new PathPlannerAuto("Shoot Only - Speaker"));
+                // m_autoChooser.setDefaultOption("Forward", new PathPlannerAuto("Forward"));
+                // m_autoChooser.addOption("2 Note Preload", new PathPlannerAuto("2Note Preload"));
+                // m_autoChooser.addOption("!!!!NOTHING!!!!!", new WaitCommand(2));
+                // m_autoChooser.addOption("Shoot Only - Speaker", new PathPlannerAuto("Shoot Only - Speaker"));
                 // m_autoChooser.addOption("Shoot and Note 1 - Amp ", new PathPlannerAuto("Shoot
                 // and Note 1 - Amp"));
-                m_autoChooser.addOption("Shoot Only - Amp", new PathPlannerAuto("Shoot Only - Amp"));
+                // m_autoChooser.addOption("Shoot Only - Amp", new PathPlannerAuto("Shoot Only - Amp"));
 
-                m_autoChooser.addOption("Shoot (Source Side) and Taxi",
-                                new PathPlannerAuto("Shoot (Source Side) and Taxi"));
+                // m_autoChooser.addOption("Shoot (Source Side) and Taxi",
+                //                 new PathPlannerAuto("Shoot (Source Side) and Taxi"));
 
-                m_autoChooser.addOption("WAIT Speaker Taxi (Amp side)",
-                                new PathPlannerAuto("WAIT Speaker Taxi (Amp side)"));
+                // m_autoChooser.addOption("WAIT Speaker Taxi (Amp side)",
+                               // new PathPlannerAuto("WAIT Speaker Taxi (Amp side)"));
                 // m_autoChooser.addOption("5 Note Auto V1", new PathPlannerAuto("5 Note Auto
                 // V1"));
                 // m_autoChooser.addOption("5 Note Auto V2", new PathPlannerAuto("5 Note Auto
