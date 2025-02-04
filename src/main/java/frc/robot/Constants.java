@@ -86,7 +86,7 @@ public final class Constants {
 
     public static final int kPigeon2CanId = 60;
 
-    public static final boolean kGyroReversed = false;// false;
+    public static final boolean kGyroReversed = true;// false;
   }
 
   public static final class ModuleConstants {

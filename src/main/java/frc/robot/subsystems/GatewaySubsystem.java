@@ -28,7 +28,7 @@ public class GatewaySubsystem extends SubsystemBase {
     m_gatewayMotor = new SparkMax(ShooterConstants.kTopGatewayWheelMotorID, MotorType.kBrushless);
     
     //m_gatewayMotor.setInverted(false);
-    m_gatewayConfig.inverted(false);
+    m_gatewayConfig.inverted(true);
     m_gatewayConfig.limitSwitch
       .forwardLimitSwitchType(Type.kNormallyOpen)
       .forwardLimitSwitchEnabled(false)

@@ -93,6 +93,8 @@ public class DriveSubsystem extends SubsystemBase {
 
   }
 
+
+
   /**
    * Returns the currently-estimated pose of the robot.
    *
@@ -294,7 +296,7 @@ public class DriveSubsystem extends SubsystemBase {
 
   public void flipHeading() {
     // m_gyro.setAngleAdjustment(180);
-    m_pigeon.setYaw(180);
+    m_pigeon.setYaw(0); //original value was 180. After changing from 180 to 0, the forward and backward directions were properly aligned.
   }
 
 
@@ -393,7 +395,6 @@ public class DriveSubsystem extends SubsystemBase {
     if (m_first) {
       System.out.println("Alliance Apriltag (red side = true):  " + getAlliance());
       // PhotonCam.get().setAlliance(getAlliance());
-
     }
 
     Pose2d beforeCamAdded = m_estimator.update(currentRotation2d(), getSwerveModulePositions());

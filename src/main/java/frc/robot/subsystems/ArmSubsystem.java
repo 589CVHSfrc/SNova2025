@@ -41,6 +41,7 @@ public class ArmSubsystem extends SubsystemBase {
     m_motorConfig = new SparkMaxConfig();
     m_motorConfig.limitSwitch.forwardLimitSwitchType(Type.kNormallyOpen);
     m_motorConfig.limitSwitch.reverseLimitSwitchType(Type.kNormallyOpen);
+    m_motorConfig.inverted(true);
     // m_limitSwitchConfigTop = new LimitSwitchConfig();
     // m_limitSwitchConfigBottom = new LimitSwitchConfig();
     // m_limitSwitchConfigTop.forwardLimitSwitchType(LimitSwitchConfig.Type.kNormallyOpen);
@@ -50,7 +51,7 @@ public class ArmSubsystem extends SubsystemBase {
     // m_AngleMotorConfig.apply(m_limitSwitchConfigTop);
     // m_AngleMotorConfig.inverted(true);
     m_angleMotor = new SparkMax(ArmConstants.kAngleMotorCanID, MotorType.kBrushless);
-    m_angleMotor.setInverted(true);
+    //m_angleMotor.setInverted(true);
     m_angleMotor.configure(m_motorConfig, com.revrobotics.spark.SparkBase.ResetMode.kResetSafeParameters, PersistMode.kNoPersistParameters);
     //https://docs.revrobotics.com/revlib/24-to-25
 
