@@ -60,8 +60,9 @@ public class ShooterSubsystem extends SubsystemBase {
         m_topMAXMotionConfig = new MAXMotionConfig();
         m_lowMAXMotionConfig = new MAXMotionConfig();
 
-        m_topMotor.setInverted(true);
-        m_lowMotor.setInverted(true);
+        //Change these inverted statements to the 2025 way to invert things (using the maxconfig method)
+        // m_topMotor.setInverted(true);
+        // m_lowMotor.setInverted(true);
 
         m_topShooterConfig.inverted(true);
         m_lowShooterConfig.inverted(true);

@@ -14,6 +14,8 @@ import com.revrobotics.spark.config.LimitSwitchConfig.Type;
 import com.revrobotics.spark.config.SparkBaseConfig.IdleMode;
 import com.revrobotics.spark.SparkBase;
 
+import edu.wpi.first.wpilibj.shuffleboard.Shuffleboard;
+import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import edu.wpi.first.wpilibj2.command.SubsystemBase;
 import frc.robot.Constants.ShooterConstants;
 
@@ -31,8 +33,9 @@ public class GatewaySubsystem extends SubsystemBase {
     m_gatewayConfig.inverted(true);
     m_gatewayConfig.limitSwitch
       .forwardLimitSwitchType(Type.kNormallyOpen)
-      .forwardLimitSwitchEnabled(false)
-      .reverseLimitSwitchType(Type.kNormallyOpen);
+      .forwardLimitSwitchEnabled(true)
+      .reverseLimitSwitchType(Type.kNormallyOpen)
+      .reverseLimitSwitchEnabled(false);
     // m_gatewayLimitSwitch.enableLimitSwitch(true);
     // m_gatewayReverseLimitSwitch = m_gatewayMotor.getReverseLimitSwitch(Type.kNormallyOpen);
     // m_gatewayLimitSwitch.enableLimitSwitch(false);
@@ -40,7 +43,7 @@ public class GatewaySubsystem extends SubsystemBase {
     // m_gatewayMotor.setIdleMode(IdleMode.kBrake);
     // m_gatewayMotor.burnFlash();
     m_gatewayMotor.configure(m_gatewayConfig, ResetMode.kResetSafeParameters, PersistMode.kNoPersistParameters);
-
+    m_gatewayLimitSwitch = m_gatewayMotor.getForwardLimitSwitch();
     
   }
 
@@ -67,6 +70,6 @@ public class GatewaySubsystem extends SubsystemBase {
 
   @Override
   public void periodic() {
-    
+    SmartDashboard.putBoolean("Gateway Reverse Limit Switch", m_gatewayLimitSwitch.isPressed());
   }
 }
