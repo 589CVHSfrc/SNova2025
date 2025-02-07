@@ -1,3 +1,4 @@
+
 // Copyright (c) FIRST and other WPILib contributors.
 // Open Source Software; you can modify and/or share it under the terms of
 // the WPILib BSD license file in the root directory of this project.
@@ -30,7 +31,7 @@ public class GatewaySubsystem extends SubsystemBase {
     m_gatewayMotor = new SparkMax(ShooterConstants.kTopGatewayWheelMotorID, MotorType.kBrushless);
     
     //m_gatewayMotor.setInverted(false);
-    m_gatewayConfig.inverted(true);
+    m_gatewayConfig.inverted(false);
     m_gatewayConfig.limitSwitch
       .forwardLimitSwitchType(Type.kNormallyOpen)
       .forwardLimitSwitchEnabled(true)
@@ -48,7 +49,7 @@ public class GatewaySubsystem extends SubsystemBase {
   }
 
   public boolean isSwitchPressed() {
-    return m_gatewayLimitSwitch.isPressed();
+    return m_gatewayLimitSwitch.isPressed(); 
   }
 
 

@@ -31,6 +31,7 @@ public class ArmStowEXP extends Command {
 
   @Override
   public void execute() {
+    var isReversed = m_arm.isReverselimitReached();
     if(m_arm.isReverselimitReached()){
       m_limitHit = true;
       m_timer.start();

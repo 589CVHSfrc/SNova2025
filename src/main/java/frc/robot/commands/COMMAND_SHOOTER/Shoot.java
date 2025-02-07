@@ -17,8 +17,8 @@ public class Shoot extends Command {
 
   @Override
   public void initialize() {
-    //m_gate.shootGateway();
-    //System.out.println("SHOOT");
+    // m_gate.shootGateway();
+    // System.out.println("SHOOT");
 
   }
 

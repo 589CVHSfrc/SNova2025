@@ -19,6 +19,7 @@ public class IntakeLimitSwitch extends Command {
 
   @Override
   public void initialize() {
+    int i =1;
   }
 
   @Override
