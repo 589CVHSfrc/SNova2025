@@ -121,7 +121,7 @@ public class ShooterSubsystem extends SubsystemBase {
         m_lowMotor.configure(m_lowShooterConfig, ResetMode.kResetSafeParameters,PersistMode.kNoPersistParameters);
         m_topMotor.configure(m_topShooterConfig, ResetMode.kResetSafeParameters, PersistMode.kNoPersistParameters);
 
-        m_gatewayLimitSwitch = m_topMotor.getReverseLimitSwitch();
+       // m_gatewayLimitSwitch = m_topMotor.getReverseLimitSwitch();
 
         // m_lowShooterClosedLoopController.
         // setSmartMotion(m_lowShooterClosedLoopConfig, ShooterConstants.kShooterMaxRPM, ShooterConstants.kShooterMinRPM,
@@ -161,7 +161,9 @@ public class ShooterSubsystem extends SubsystemBase {
     // }
 
     public boolean isSwitchPressed() {
-        return m_gatewayLimitSwitch.isPressed();
+        var isPressed = m_gatewayLimitSwitch.isPressed();
+
+        return isPressed;
     }
 
     public void shootSmartVelocity(double velocity) {

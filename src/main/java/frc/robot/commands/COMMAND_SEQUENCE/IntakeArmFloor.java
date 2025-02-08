@@ -7,7 +7,7 @@ package frc.robot.commands.COMMAND_SEQUENCE;
 import edu.wpi.first.wpilibj2.command.SequentialCommandGroup;
 // import frc.robot.commands.COMMAND_ARM.ArmFloor;
 //
-import frc.robot.commands.COMMAND_ARM.ArmStow;
+//import frc.robot.commands.COMMAND_ARM.ArmStow;
 import frc.robot.commands.COMMAND_ARM.ArmStowEXP;
 import frc.robot.commands.COMMAND_PARALLEL.IntakeDown;
 import frc.robot.commands.COMMAND_TESTING.printmessage;
@@ -23,6 +23,7 @@ public class IntakeArmFloor extends SequentialCommandGroup {
         new IntakeDown(arm, shooter, gate), //ArmFloor(arm, ()-> .2).alongWith(new IntakeLimitSwitch(shooter, gate)),
        new printmessage(arm),
         new ArmStowEXP(arm, ()-> .2)
+        
 
     );
   }

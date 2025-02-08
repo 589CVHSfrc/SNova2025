@@ -38,7 +38,6 @@ public class ArmFloor extends Command {
   @Override
   public boolean isFinished() {
     var forwardLS = m_arm.isForwardLimitReached();
-    
-    return m_arm.isForwardLimitReached();
+    return forwardLS;
   }
 }

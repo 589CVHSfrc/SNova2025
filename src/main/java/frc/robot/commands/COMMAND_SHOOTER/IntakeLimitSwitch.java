@@ -36,6 +36,7 @@ public class IntakeLimitSwitch extends Command {
 
   @Override
   public boolean isFinished() {
-    return m_shooter.isSwitchPressed();
+    var isPressed = m_gate.isSwitchPressed();
+    return isPressed;
   }
 }

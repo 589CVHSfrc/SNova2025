@@ -69,7 +69,7 @@ public class ArmSubsystem extends SubsystemBase {
   public boolean isForwardLimitReached() {
     boolean ispressed = m_limitSwitchTop.isPressed();
     //showing as false even when pressed :(
-    return m_limitSwitchTop.isPressed();
+    return ispressed;
   }
 
   public boolean isReverselimitReached() {

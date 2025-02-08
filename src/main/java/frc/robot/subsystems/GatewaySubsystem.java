@@ -24,7 +24,7 @@ public class GatewaySubsystem extends SubsystemBase {
   private SparkMax m_gatewayMotor;
   private SparkMaxConfig m_gatewayConfig;
   private SparkLimitSwitch m_gatewayLimitSwitch;
-  private SparkLimitSwitch m_gatewayReverseLimitSwitch;
+  //private SparkLimitSwitch m_gatewayReverseLimitSwitch;
 
   public GatewaySubsystem() {
     m_gatewayConfig = new SparkMaxConfig();
@@ -71,6 +71,6 @@ public class GatewaySubsystem extends SubsystemBase {
 
   @Override
   public void periodic() {
-    SmartDashboard.putBoolean("Gateway Reverse Limit Switch", m_gatewayLimitSwitch.isPressed());
+    SmartDashboard.putBoolean("Gateway Forward Limit Switch", m_gatewayLimitSwitch.isPressed());
   }
 }
